@@ -1,7 +1,4 @@
-import argon2 from "argon2";
 import path from "path";
-import fs from "fs";
-import { Op } from "sequelize";
 import Letter from "../models/LetterModel.js";
 
 export const getLetters = async (req, res) => {
@@ -24,7 +21,7 @@ export const createLetter = async (req, res) => {
   const fileSize = file.data.length;
   const ext = path.extname(file.name);
   const fileName = file.md5 + ext;
-  const url = `${req.protocol}://${req.get("host")}/images/${fileName}`;
+  const url = `${req.protocol}://${req.get("host")}/images/letters/${fileName}`;
   const allowedType = [".png", ".jpg", ".jpeg"];
 
   if (!allowedType.includes(ext.toLowerCase()))
@@ -32,7 +29,7 @@ export const createLetter = async (req, res) => {
   if (fileSize > 5000000)
     return res.status(422).json({ msg: "Image must be less than 5 MB" });
 
-  file.mv(`./public/images/letter/${fileName}`, async (err) => {
+  file.mv(`./public/images/letters/${fileName}`, async (err) => {
     if (err) return res.status(500).json({ msg: err.message });
     try {
       await Letter.create({

@@ -4,8 +4,8 @@ import db from "../config/Database.js";
 
 const { DataTypes } = Sequelize;
 
-const CategoryLesson = db.define(
-  "category_lesson",
+const CategoryChallenge = db.define(
+  "category_challenge",
   {
     uuid: {
       type: DataTypes.STRING,
@@ -38,4 +38,4 @@ const CategoryLesson = db.define(
   }
 );
 
-export default CategoryLesson;
+export default CategoryChallenge;

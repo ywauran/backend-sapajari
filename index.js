@@ -9,7 +9,8 @@ import UserRoute from "./routes/UserRoute.js";
 import AuthRoute from "./routes/AuthRoute.js";
 import LetterRoute from "./routes/LetterRoute.js";
 import NumberRoute from "./routes/NumberRoute.js";
-import CategoryLesson from "./routes/CategoryLessonRoute.js";
+import CategoryChallengeRoute from "./routes/CategoryChallengeRoute.js";
+import ChallegeRoute from "./routes/ChallengeRoute.js";
 
 dotenv.config();
 
@@ -51,7 +52,8 @@ app.use(UserRoute);
 app.use(AuthRoute);
 app.use(NumberRoute);
 app.use(LetterRoute);
-app.use(CategoryLesson);
+app.use(CategoryChallengeRoute);
+app.use(ChallegeRoute);
 
 store.sync();
 
