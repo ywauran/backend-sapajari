@@ -1,7 +1,8 @@
 FROM node:16.18.0-alpine
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
+ENV APP_PORT=5000 \
+    SESS_SECRET=aksdbadbiaksd
 COPY . .
-EXPOSE 5000
+RUN npm install
+EXPOSE $APP_PORT
 CMD ["npm", "run", "start"]
