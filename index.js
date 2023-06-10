@@ -14,6 +14,9 @@ import ChallegeRoute from "./routes/ChallengeRoute.js";
 
 dotenv.config();
 
+const PORT = 8000;
+const HOST = "0.0.0.0";
+
 const app = express();
 
 const sessionStore = SequelizeStore(session.Store);
@@ -28,7 +31,7 @@ const store = new sessionStore({
 
 app.use(
   session({
-    secret: process.env.SESS_SECRET,
+    secret: "askabsdkasbdkkasbd",
     resave: false,
     saveUninitialized: true,
     store: store,
@@ -59,6 +62,6 @@ store.sync();
 
 app.get("/", (req, res) => res.send("<h1>Backend SapaJari</h1>"));
 
-app.listen(process.env.APP_PORT, () => {
+app.listen(PORT, HOST, () => {
   console.log("Server up and running...");
 });
