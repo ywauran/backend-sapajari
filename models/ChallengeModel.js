@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize";
 // eslint-disable-next-line import/extensions
 import db from "../config/Database.js";
+import CategoryChallengeModel from "./CategoryChallengeModel.js";
 
 const { DataTypes } = Sequelize;
 
@@ -27,5 +28,11 @@ const Challenge = db.define(
     freezeTableName: true,
   }
 );
+
+CategoryChallengeModel.hasMany(Challenge);
+
+Challenge.belongsTo(CategoryChallengeModel, {
+  foreignKey: "categoryChallengeId",
+});
 
 export default Challenge;
