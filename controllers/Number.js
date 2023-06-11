@@ -10,7 +10,18 @@ export const getNumbers = async (req, res) => {
   }
 };
 
-export const getNumberById = async (req, res) => {};
+export const getNumberById = async (req, res) => {
+  try {
+    const response = await Number.findOne({
+      where: {
+        uuid: req.params.id,
+      },
+    });
+    res.status(200).json({ response });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 export const createNumber = async (req, res) => {
   if (req.files === null)
@@ -44,6 +55,48 @@ export const createNumber = async (req, res) => {
   });
 };
 
-export const updateNumber = async (req, res) => {};
+export const updateNumber = async (req, res) => {
+  const number = await Number.findOne({
+    where: {
+      uuid: req.params.id,
+    },
+  });
+  if (!number) return res.status(404).json({ msg: "Data tidak ditemukan" });
+  const { symbol, description } = req.body;
+  try {
+    await Number.update(
+      {
+        symbol: symbol,
+        description: description,
+      },
+      {
+        where: {
+          id: number.id,
+        },
+      }
+    );
+    res.status(200).json({ msg: "Data berhasil diperbarui" });
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
+  }
+};
 
-export const deleteNumber = async (req, res) => {};
+export const deleteNumber = async (req, res) => {
+  const number = await Number.findOne({
+    where: {
+      uuid: req.params.id,
+    },
+  });
+
+  if (!number) return res.status(404).json({ msg: "Data tidak ditemukan" });
+  try {
+    await Number.destroy({
+      where: {
+        id: number.id,
+      },
+    });
+    res.status(200).json({ msg: "Data berhasil dihapus" });
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
+  }
+};

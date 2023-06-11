@@ -62,6 +62,5 @@ store.sync();
 
 app.get("/", (req, res) => res.send("<h1>Backend SapaJari</h1>"));
 
-app.listen(PORT, HOST, () => {
-  console.log("Server up and running...");
-});
+app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);

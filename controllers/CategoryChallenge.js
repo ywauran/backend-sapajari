@@ -46,6 +46,50 @@ export const createCategoryChallenge = async (req, res) => {
   });
 };
 
-export const updateCategoryChallenge = async (req, res) => {};
+export const updateCategoryChallenge = async (req, res) => {
+  const categoryChallenge = await CategoryChallenge.findOne({
+    where: {
+      uuid: req.params.id,
+    },
+  });
+  if (!categoryChallenge)
+    return res.status(404).json({ msg: "Data tidak ditemukan" });
+  const { title, description } = req.body;
+  try {
+    await CategoryChallenge.update(
+      {
+        title: title,
+        description: description,
+      },
+      {
+        where: {
+          id: categoryChallenge.id,
+        },
+      }
+    );
+    res.status(200).json({ msg: "Data berhasil diperbarui" });
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
+  }
+};
 
-export const deeleteCategoryChallenge = async (req, res) => {};
+export const deleteCategoryChallenge = async (req, res) => {
+  const categoryChallenge = await CategoryChallenge.findOne({
+    where: {
+      uuid: req.params.id,
+    },
+  });
+
+  if (!categoryChallenge)
+    return res.status(404).json({ msg: "Data tidak ditemukan" });
+  try {
+    await CategoryChallenge.destroy({
+      where: {
+        id: categoryChallenge.id,
+      },
+    });
+    res.status(200).json({ msg: "Data berhasil dihapus" });
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
+  }
+};

@@ -12,7 +12,7 @@ const router = express.Router();
 router.get("/challenges", getChallenges);
 router.get("/challenge/:id", getChallengeById);
 router.post("/challenge", createChallenge);
-router.patch("/challenges/:id", updateChallenge);
-router.delete("/challenges/:id", deleteChallenge);
+router.patch("/challenge/:id", updateChallenge);
+router.delete("/challenge/:id", deleteChallenge);
 
 export default router;

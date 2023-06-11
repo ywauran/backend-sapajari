@@ -4,7 +4,7 @@ import {
   getCategoryChallengeById,
   createCategoryChallenge,
   updateCategoryChallenge,
-  deeleteCategoryChallenge,
+  deleteCategoryChallenge,
 } from "../controllers/CategoryChallenge.js";
 
 const router = express.Router();
@@ -12,7 +12,7 @@ const router = express.Router();
 router.get("/category-challenges", getCategoryChallenge);
 router.get("/category-challenge/:id", getCategoryChallengeById);
 router.post("/category-challenge", createCategoryChallenge);
-router.patch("/category-challenges/:id", updateCategoryChallenge);
-router.delete("/category-challenges/:id", deeleteCategoryChallenge);
+router.patch("/category-challenge/:id", updateCategoryChallenge);
+router.delete("/category-challenge/:id", deleteCategoryChallenge);
 
 export default router;

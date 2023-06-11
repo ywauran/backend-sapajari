@@ -45,6 +45,48 @@ export const createLetter = async (req, res) => {
   });
 };
 
-export const updateLetter = async (req, res) => {};
+export const updateLetter = async (req, res) => {
+  const letter = await Letter.findOne({
+    where: {
+      uuid: req.params.id,
+    },
+  });
+  if (!letter) return res.status(404).json({ msg: "Data tidak ditemukan" });
+  const { symbol, description } = req.body;
+  try {
+    await Letter.update(
+      {
+        symbol: symbol,
+        description: description,
+      },
+      {
+        where: {
+          id: letter.id,
+        },
+      }
+    );
+    res.status(200).json({ msg: "Data berhasil diperbarui" });
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
+  }
+};
 
-export const deleteLetter = async (req, res) => {};
+export const deleteLetter = async (req, res) => {
+  const letter = await Letter.findOne({
+    where: {
+      uuid: req.params.id,
+    },
+  });
+
+  if (!letter) return res.status(404).json({ msg: "Data tidak ditemukan" });
+  try {
+    await Letter.destroy({
+      where: {
+        id: letter.id,
+      },
+    });
+    res.status(200).json({ msg: "Data berhasil dihapus" });
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
+  }
+};

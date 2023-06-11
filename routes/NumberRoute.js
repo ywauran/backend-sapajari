@@ -12,7 +12,7 @@ const router = express.Router();
 router.get("/numbers", getNumbers);
 router.get("/number/:id", getNumberById);
 router.post("/number", createNumber);
-router.patch('/number":id', updateNumber);
+router.patch("/number/:id", updateNumber);
 router.delete("/number/:id", deleteNumber);
 
 export default router;
