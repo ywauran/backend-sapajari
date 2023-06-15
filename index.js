@@ -12,9 +12,10 @@ import NumberRoute from "./routes/NumberRoute.js";
 import CategoryChallengeRoute from "./routes/CategoryChallengeRoute.js";
 import ChallegeRoute from "./routes/ChallengeRoute.js";
 
+
 dotenv.config();
 
-const PORT = 8000;
+const PORT = 8080;
 const HOST = "0.0.0.0";
 
 const app = express();
@@ -44,7 +45,7 @@ app.use(
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:3001",
+    origin: "https://frontend-admin-sapajari.vercel.app/",
   })
 );
 
