@@ -1,5 +1,6 @@
 import Challenge from "../models/ChallengeModel.js";
 import CategoryChallenge from "../models/CategoryChallengeModel.js";
+import { Sequelize } from "sequelize";
 
 export const getChallenges = async (req, res) => {
   try {
@@ -51,5 +52,29 @@ export const deleteChallenge = async (req, res) => {
     res.status(200).json({ msg: "Data berhasil dihapus" });
   } catch (error) {
     console.log(error.message);
+  }
+};
+
+export const getRandomChallengeByCategoryChallenge = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const challenges = await Challenge.findAll({
+      where: {
+        categoryChallengeId: id,
+      },
+    });
+
+    if (!challenges) {
+      return res.status(404).json({ error: "Challenge not found" });
+    }
+
+    const sortedChallenges = challenges.sort(() => Math.random() - 0.5);
+    const randomChallenge = sortedChallenges.slice(0, 1);
+
+    res.status(200).json(randomChallenge);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server error" });
   }
 };
