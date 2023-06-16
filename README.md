@@ -1,8 +1,8 @@
-# backend-sapajari
+# BackendSapjari
 
 ## Deployment
 
-1. clone repository
+### 1. clone repository
 
 ```bash
   git clone https://github.com/ywauran/backend-sapajari
@@ -12,7 +12,8 @@
   gcloud components update
 ```
 
-2. set up environtment
+### 2. set up environtment
+
 add Dockerfile
 
 ```bash
@@ -25,17 +26,20 @@ EXPOSE 5000
 CMD [ "npm", "run", "start"]
 ```
 
-3. docker tag
+### 3. docker tag
 
 ```bash
 docker tag app gcr.io/sapajari/index
 ```
-4. docker push
+
+### 4. docker push
+
 ```bash
 docker push gcr.io/sapajari/index
 ```
 
-5. Deployment
+### 5. Deployment
+
 ```bash
 gcloud app deploy
 ```
